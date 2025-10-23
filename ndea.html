@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teatro Auditórium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f9fafb, #f3f4f6);
+        }
+
+        .navbar {
+            background: linear-gradient(to right, #581c87, #6b21a8, #4338ca);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(to right, #9333ea, #4f46e5);
+            color: white;
+            padding: 4rem;
+            border-radius: 1rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #9333ea;
+        }
+
+        .btn-secondary {
+            background: #9333ea;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .card-image {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: #f3e8ff;
+            color: #7e22ce;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #9333ea;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .footer {
+            background: #111827;
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer ul {
+            list-style: none;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+            color: #9ca3af;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #1f2937;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-method {
+            padding: 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">Teatro Auditórium</div>
+            <ul class="navbar-menu">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#cartelera">Cartelera</a></li>
+                <li><a href="#salas">Salas</a></li>
+                <li><a href="#registro">Registro</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <div class="hero">
+                <h1>Bienvenido al Teatro Auditórium</h1>
+                <p>Vive la magia del teatro en vivo</p>
+                <button class="btn btn-primary">Ver Cartelera</button>
+            </div>
+
+            <h2>Espectáculos Destacados</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-image">⭐</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Romeo y Julieta</h3>
+                        <span class="card-badge">Drama Romántico</span>
+                        <p class="card-description">Una reinterpretación moderna del clásico de Shakespeare</p>
+                        <div class="detail-item">Elenco: María González, Carlos Ruiz</div>
+                        <div class="detail-item">Fecha: Viernes 8:00 PM</div>
+                        <div class="detail-item">Sala: Sala Principal</div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                            <span class="price">$2500</span>
+                            <button class="btn btn-secondary">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">⭐</div>
+                    <div class="card-content">
+                        <h3 class="card-title">La Casa de Bernarda Alba</h3>
+                        <span class="card-badge">Drama</span>
+                        <p class="card-description">El drama más aclamado de Federico García Lorca</p>
+                        <div class="detail-item">Elenco: Laura Fernández, Patricia Silva</div>
+                        <div class="detail-item">Fecha: Sábado 7:00 PM</div>
+                        <div class="detail-item">Sala: Sala Principal</div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                            <span class="price">$2200</span>
+                            <button class="btn btn-secondary">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">⭐</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Comedia de Enredos</h3>
+                        <span class="card-badge">Comedia</span>
+                        <p class="card-description">Una noche llena de risas</p>
+                        <div class="detail-item">Elenco: Pedro Sánchez, Lucía Torres</div>
+                        <div class="detail-item">Fecha: Domingo 6:00 PM</div>
+                        <div class="detail-item">Sala: Sala Experimental</div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                            <span class="price">$1800</span>
+                            <button class="btn btn-secondary">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cartelera" style="background: white; padding: 3rem 0;">
+        <div class="container">
+            <h2>Cartelera Completa</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-image">⭐</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Hamlet</h3>
+                        <span class="card-badge">Tragedia</span>
+                        <p class="card-description">La obra maestra de Shakespeare</p>
+                        <div class="detail-item">Fecha: Jueves 8:30 PM</div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                            <span class="price">$2800</span>
+                            <button class="btn btn-secondary">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image">⭐</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Esperando a Godot</h3>
+                        <span class="card-badge">Teatro Absurdo</span>
+                        <p class="card-description">La obra cumbre de Samuel Beckett</p>
+                        <div class="detail-item">Fecha: Miércoles 7:30 PM</div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                            <span class="price">$2000</span>
+                            <button class="btn btn-secondary">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="salas">
+        <div class="container">
+            <h2>Nuestras Salas</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #4f46e5, #9333ea);">📍</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Sala Principal</h3>
+                        <span class="card-badge">Capacidad: 500 personas</span>
+                        <p class="card-description">Nuestra sala más grande con tecnología de última generación</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #4f46e5, #9333ea);">📍</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Sala Experimental</h3>
+                        <span class="card-badge">Capacidad: 150 personas</span>
+                        <p class="card-description">Espacio íntimo para obras de vanguardia</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #4f46e5, #9333ea);">📍</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Sala Íntima</h3>
+                        <span class="card-badge">Capacidad: 80 personas</span>
+                        <p class="card-description">Un espacio cercano y exclusivo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="registro" style="background: white; padding: 3rem 0;">
+        <div class="container">
+            <div class="card" style="max-width: 800px; margin: 0 auto;">
+                <div style="background: linear-gradient(to right, #9333ea, #4f46e5); color: white; padding: 2rem;">
+                    <h2 style="color: white; margin-bottom: 0.5rem;">Crear Cuenta</h2>
+                    <p>Regístrate para comprar entradas</p>
+                </div>
+                <div class="card-content" style="padding: 2rem;">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Apellido</label>
+                                <input type="text" class="form-input" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Teléfono</label>
+                            <input type="tel" class="form-input" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Contraseña</label>
+                                <input type="password" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirmar Contraseña</label>
+                                <input type="password" class="form-input" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-secondary" style="width: 100%; padding: 1rem;">
+                            Crear Cuenta
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compra">
+        <div class="container">
+            <h2>Compra de Entradas</h2>
+            <div class="card" style="max-width: 900px; margin: 0 auto;">
+                <div class="card-content" style="padding: 2rem;">
+                    <form>
+                        <h3>Cantidad de Entradas</h3>
+                        <div style="margin-bottom: 2rem;">
+                            <input type="number" class="form-input" value="1" min="1" max="10" style="max-width: 150px;">
+                        </div>
+
+                        <h3>Forma de Pago</h3>
+                        <div class="payment-methods">
+                            <div class="payment-method">
+                                <div class="payment-icon">💳</div>
+                                <div>Tarjeta</div>
+                            </div>
+                            <div class="payment-method">
+                                <div class="payment-icon">💵</div>
+                                <div>Efectivo</div>
+                            </div>
+                            <div class="payment-method">
+                                <div class="payment-icon">🏦</div>
+                                <div>Transferencia</div>
+                            </div>
+                        </div>
+
+                        <h3>Datos del Comprador</h3>
+                        <div class="form-group">
+                            <label class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" required>
+                        </div>
+
+                        <h3>Datos de Pago</h3>
+                        <div class="form-group">
+                            <label class="form-label">Número de Tarjeta</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Vencimiento</label>
+                                <input type="text" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">CVV</label>
+                                <input type="text" class="form-input">
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                            <button type="button" class="btn btn-cancel" style="flex: 1;">Cancelar</button>
+                            <button type="submit" class="btn btn-secondary" style="flex: 1;">Confirmar Compra</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>Teatro Auditórium</h3>
+                <p style="color: #9ca3af;">La mejor experiencia teatral</p>
+            </div>
+            <div>
+                <h3>Enlaces</h3>
+                <ul>
+                    <li><a href="#home" style="color: #9ca3af; text-decoration: none;">Inicio</a></li>
+                    <li><a href="#cartelera" style="color: #9ca3af; text-decoration: none;">Cartelera</a></li>
+                    <li><a href="#salas" style="color: #9ca3af; text-decoration: none;">Salas</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contacto</h3>
+                <ul>
+                    <li>Av. Principal 123, Jujuy</li>
+                    <li>+54 388 123-4567</li>
+                    <li>info@teatroauditorium.com</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Horarios</h3>
+                <ul>
+                    <li>Lunes a Viernes: 14:00 - 22:00</li>
+                    <li>Sábados: 16:00 - 23:00</li>
+                    <li>Domingos: 15:00 - 21:00</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
